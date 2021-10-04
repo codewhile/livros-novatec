@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="false"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/categoriaDoLivro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="Categoria"
+        android:textColor="#5C6BC0"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/nomeDoLivro"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <TextView
+        android:id="@+id/nomeDoLivro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/autorDoLivro"
+        app:layout_constraintStart_toStartOf="@+id/categoriaDoLivro"
+        app:layout_constraintTop_toBottomOf="@+id/categoriaDoLivro" />
+
+    <TextView
+        android:id="@+id/autorDoLivro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="autor"
+        app:layout_constraintBottom_toTopOf="@+id/anoDoLivro"
+        app:layout_constraintStart_toStartOf="@+id/nomeDoLivro"
+        app:layout_constraintTop_toBottomOf="@+id/nomeDoLivro" />
+
+    <TextView
+        android:id="@+id/anoDoLivro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ano"
+        app:layout_constraintBottom_toTopOf="@+id/paginaDoLivro"
+        app:layout_constraintStart_toStartOf="@+id/autorDoLivro"
+        app:layout_constraintTop_toBottomOf="@+id/autorDoLivro" />
+
+    <TextView
+        android:id="@+id/paginaDoLivro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="paginas"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/anoDoLivro"
+        app:layout_constraintTop_toBottomOf="@+id/anoDoLivro" />
+</androidx.constraintlayout.widget.ConstraintLayout>

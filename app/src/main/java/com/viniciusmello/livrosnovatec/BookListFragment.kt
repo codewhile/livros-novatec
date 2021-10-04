@@ -28,32 +28,19 @@ class BookListFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_books_view, container, false)
     }
 
-    fun isDeviceConnected(): Boolean {
-
-        val connectivityManager =
-            requireContext().getSystemService(Context.CONNECTIVITY_SERVICE)
-                    as ConnectivityManager
-
-        return connectivityManager.activeNetworkInfo?.isConnected ?: false
-
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
 
         viewHolder = ViewHolder(view)
 
-        val arrayAdapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_list_item_1, books
-        )
+        val arrayAdapter = BookAdapter(requireContext(), books)
 
         viewHolder.lisView.adapter = arrayAdapter
 
         hideProgress()
 
-        if (isDeviceConnected()) {
+        if (BookFinder.isDeviceConnected(requireContext())) {
 
             if (async == null) {
 
@@ -106,7 +93,7 @@ class BookListFragment : Fragment() {
     }
 
     private fun updateUI(result: List<Book>?) {
-        if (result != null) {
+        if (result != null && result.isNotEmpty()) {
 
             books.clear()
             books.addAll(result)
@@ -131,7 +118,7 @@ class BookListFragment : Fragment() {
         }
 
         override fun doInBackground(vararg params: Void?): List<Book>? {
-            return BookFinder.loadBooksFromServer(requireContext())
+            return BookFinder.loadBooksFromServerXML()
         }
         override fun onPostExecute(result: List<Book>?) {
             hideProgress()
