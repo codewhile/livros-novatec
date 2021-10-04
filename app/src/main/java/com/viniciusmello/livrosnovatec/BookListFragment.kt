@@ -20,7 +20,7 @@ class BookListFragment : Fragment(), CoroutineScope {
 
     private var job = Job()
     private var dowloadJob: Job? = null
-    private lateinit var viewHolder: ViewHolder
+    private  lateinit var viewHolder: ViewHolder
 
     private val books = mutableListOf<Book>()
 
