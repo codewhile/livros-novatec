@@ -2,6 +2,9 @@ package com.viniciusmello.livrosnovatec
 
 import android.content.Context
 import android.net.ConnectivityManager
+import com.google.gson.Gson
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import org.json.JSONArray
 import org.json.JSONObject
 import org.xmlpull.v1.XmlPullParser
@@ -11,6 +14,7 @@ import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
+import java.util.concurrent.TimeUnit
 
 object BookFinder {
 
@@ -21,6 +25,42 @@ object BookFinder {
         "https://raw.githubusercontent.com/nglauber/dominando_android3/master/livros_novatec.xml"
 
     private const val TIME_SECONDS: Int = 1000
+
+    fun getBooksByOkHttp3AndGson(): List<Book>? {
+        val client = OkHttpClient.Builder()
+            .connectTimeout(5, TimeUnit.HOURS)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .build()
+
+        val request = Request.Builder()
+            .url(SERVER_JSON)
+            .build()
+
+        val response = client.newCall(request).execute()
+
+        val json = response.body?.string()
+
+        val gson = Gson()
+
+        val livraria:Livraria = gson.fromJson(json, Livraria::class.java)
+
+        var books: MutableList<Book> = mutableListOf()
+
+        livraria.categorias.forEach { categoria ->
+            var booksSearched = categoria.livros.map { book ->
+                book.apply {
+                    book.categoria = categoria.nome
+                }
+            }
+
+            books.addAll(booksSearched)
+
+        }
+
+        return books
+
+    }
+
 
     fun loadBooksFromServerJson(): List<Book>? {
 
@@ -194,15 +234,14 @@ object BookFinder {
 
     }
 
-    fun isDeviceConnected(context:Context): Boolean {
+    fun isDeviceConnected(context: Context): Boolean {
 
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE)
-                    as ConnectivityManager
+                as ConnectivityManager
 
         return connectivityManager.activeNetworkInfo?.isConnected ?: false
 
     }
-
 
 
 }

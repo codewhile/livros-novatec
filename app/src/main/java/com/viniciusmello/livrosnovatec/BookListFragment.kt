@@ -81,7 +81,7 @@ class BookListFragment : Fragment(), CoroutineScope {
         dowloadJob = launch {
             // Executa função suspensa de forma Síncrona
             val books: List<Book>? = withContext(Dispatchers.IO) {
-                BookFinder.loadBooksFromServerJson()
+                BookFinder.getBooksByOkHttp3AndGson()
             }
 
             // Executa Threads Pararelamente
