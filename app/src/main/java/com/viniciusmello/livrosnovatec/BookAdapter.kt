@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.viniciusmello.livrosnovatec.entities.Book
 
 
 class BookAdapter(context: Context, var books: MutableList<Book>) :

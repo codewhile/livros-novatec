@@ -1,8 +1,10 @@
-package com.viniciusmello.livrosnovatec
+package com.viniciusmello.livrosnovatec.impl
 
 import android.content.Context
 import android.net.ConnectivityManager
 import com.google.gson.Gson
+import com.viniciusmello.livrosnovatec.entities.Livraria
+import com.viniciusmello.livrosnovatec.entities.Book
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONArray
@@ -26,7 +28,7 @@ object BookFinder {
 
     private const val TIME_SECONDS: Int = 1000
 
-    fun getBooksByOkHttp3AndGson(): List<Book>? {
+    fun getBooksByOkHttp3AndGson(): List<Book> {
         val client = OkHttpClient.Builder()
             .connectTimeout(5, TimeUnit.HOURS)
             .readTimeout(10, TimeUnit.SECONDS)
@@ -42,7 +44,7 @@ object BookFinder {
 
         val gson = Gson()
 
-        val livraria:Livraria = gson.fromJson(json, Livraria::class.java)
+        val livraria: Livraria = gson.fromJson(json, Livraria::class.java)
 
         var books: MutableList<Book> = mutableListOf()
 

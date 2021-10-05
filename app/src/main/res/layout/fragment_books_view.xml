@@ -22,7 +22,7 @@
         android:id="@+id/txtMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Loading this fragment"
+        android:text="@string/search"
         android:textColor="#42A5F5"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,4 +1,4 @@
-package com.viniciusmello.livrosnovatec
+package com.viniciusmello.livrosnovatec.entities
 
 import com.google.gson.annotations.SerializedName
 
